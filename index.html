@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telas y Algo Más | Mar del Plata</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display (Elegancia) & Lato (Lectura) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-gold': '#D4AF37',
+                        'brand-dark': '#1A1A1A',
+                        'brand-cream': '#F9F7F2',
+                        'brand-gray': '#4A4A4A',
+                        'brand-accent': '#8B4513' 
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom Animations */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+        }
+
+        /* Fabric Texture Overlay Pattern */
+        .texture-bg {
+            background-color: #F9F7F2;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .img-hover-zoom {
+            overflow: hidden;
+        }
+        .img-hover-zoom img {
+            transition: transform 0.5s ease;
+        }
+        .img-hover-zoom:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Ajuste para el Top Bar + Navbar Fixed */
+        body {
+            padding-top: 0; 
+        }
+    </style>
+</head>
+<body class="font-sans text-brand-gray bg-brand-cream antialiased">
+
+    <!-- Top Bar: Información Vital para clientes de Google Maps -->
+    <div class="bg-brand-dark text-gray-300 text-xs py-2 hidden md:block z-50 relative">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex gap-6">
+                 <a href="#contacto" class="hover:text-brand-gold transition flex items-center gap-2">
+                    <i class="fa-solid fa-location-dot text-brand-gold"></i> Av. Juan B. Justo 1234, Mar del Plata
+                 </a>
+                 <span class="flex items-center gap-2">
+                    <i class="fa-regular fa-clock text-brand-gold"></i> Lun-Vie: 9-20hs | Sáb: 9-13hs
+                 </span>
+            </div>
+            <div>
+                 <a href="https://wa.me/5492231234567" target="_blank" class="hover:text-white transition font-bold text-brand-gold flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp"></i> Ventas: +54 9 223 123-4567
+                 </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 w-full z-40 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100" id="navbar">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl md:text-3xl font-serif font-bold text-brand-dark tracking-wide flex items-center gap-2">
+                <i class="fa-solid fa-layer-group text-brand-gold"></i>
+                Telas y Algo Más
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6 lg:space-x-8 items-center">
+                <a href="#inicio" class="text-xs lg:text-sm uppercase tracking-widest hover:text-brand-gold transition font-bold">Inicio</a>
+                <a href="#empresa" class="text-xs lg:text-sm uppercase tracking-widest hover:text-brand-gold transition font-bold">La Empresa</a>
+                <a href="#colecciones" class="text-xs lg:text-sm uppercase tracking-widest hover:text-brand-gold transition font-bold">Catálogo</a>
+                <a href="#calculadora" class="text-xs lg:text-sm uppercase tracking-widest hover:text-brand-gold transition font-bold">Calculadora</a>
+                <a href="#contacto" class="bg-brand-dark text-white px-5 py-2 rounded-none hover:bg-brand-gold transition duration-300 text-xs lg:text-sm uppercase tracking-widest font-bold shadow-md">
+                    Ubicación
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-brand-dark text-2xl p-2" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t absolute w-full left-0 shadow-xl">
+            <div class="flex flex-col p-6 space-y-4 text-center">
+                <a href="#inicio" class="text-brand-dark hover:text-brand-gold font-bold uppercase text-sm" onclick="toggleMenu()">Inicio</a>
+                <a href="#empresa" class="text-brand-dark hover:text-brand-gold font-bold uppercase text-sm" onclick="toggleMenu()">La Empresa</a>
+                <a href="#colecciones" class="text-brand-dark hover:text-brand-gold font-bold uppercase text-sm" onclick="toggleMenu()">Catálogo</a>
+                <a href="#calculadora" class="text-brand-dark hover:text-brand-gold font-bold uppercase text-sm" onclick="toggleMenu()">Calculadora</a>
+                <a href="#contacto" class="text-brand-gold font-bold uppercase text-sm" onclick="toggleMenu()">Ver Mapa y Horarios</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative h-[85vh] flex items-center justify-center">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=2070&auto=format&fit=crop" alt="Telas de lujo Mar del Plata" class="w-full h-full object-cover">
+            <div class="hero-overlay absolute inset-0"></div>
+        </div>
+
+        <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto mt-10">
+            <h2 class="text-sm md:text-base uppercase tracking-[0.3em] mb-4 text-brand-gold fade-in-up font-bold" style="animation-delay: 0.1s;">Desde Mar del Plata para tu Hogar</h2>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight fade-in-up drop-shadow-lg" style="animation-delay: 0.3s;">
+                Telas, Cortinas y <br> <span class="italic text-brand-gold">Diseño Exclusivo</span>
+            </h1>
+            <p class="text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto text-gray-100 fade-in-up" style="animation-delay: 0.5s;">
+                Transformamos ambientes con textiles de alta calidad y confección a medida. Visita nuestro showroom o consulta por WhatsApp.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center fade-in-up" style="animation-delay: 0.7s;">
+                <a href="https://wa.me/5492231234567" target="_blank" class="bg-brand-gold text-brand-dark px-8 py-4 uppercase tracking-widest text-sm font-bold hover:bg-white transition duration-300 shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp"></i> Consultar Precio
+                </a>
+                <a href="#contacto" class="border-2 border-white text-white px-8 py-4 uppercase tracking-widest text-sm font-bold hover:bg-white hover:text-brand-dark transition duration-300 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-location-arrow"></i> Cómo Llegar
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us / La Empresa (New Section for Trust) -->
+    <section id="empresa" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-16">
+                <div class="md:w-1/2 relative">
+                    <div class="absolute top-[-20px] left-[-20px] w-24 h-24 border-t-4 border-l-4 border-brand-gold hidden md:block"></div>
+                    <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=2070&auto=format&fit=crop" alt="Showroom Telas" class="w-full shadow-2xl rounded-sm z-10 relative">
+                    <div class="absolute bottom-[-20px] right-[-20px] w-24 h-24 border-b-4 border-r-4 border-brand-gold hidden md:block"></div>
+                </div>
+                <div class="md:w-1/2">
+                    <span class="text-brand-gold uppercase tracking-widest text-xs font-bold">Nuestra Historia</span>
+                    <h2 class="font-serif text-4xl font-bold text-brand-dark mt-2 mb-6">Más que una tienda de telas, <br>somos creadores de ambientes.</h2>
+                    <p class="text-gray-500 leading-relaxed mb-6">
+                        En <strong>Telas y Algo Más</strong>, llevamos años vistiendo las ventanas y hogares de Mar del Plata. Nos destacamos por ofrecer una selección curada de textiles importados y nacionales, garantizando durabilidad y estilo.
+                    </p>
+                    <p class="text-gray-500 leading-relaxed mb-8">
+                        Nuestro equipo no solo vende tela; ofrecemos asesoramiento integral. Entendemos que cada cliente que llega desde Google Maps o por recomendación busca calidad y confianza.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-star text-brand-gold mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-sm uppercase">Calidad Premium</h4>
+                                <p class="text-xs text-gray-400">Selección de las mejores texturas.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-hand-holding-heart text-brand-gold mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-sm uppercase">Atención Personal</h4>
+                                <p class="text-xs text-gray-400">Asesoramiento experto en deco.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Icons -->
+    <section class="py-16 bg-brand-cream border-y border-gray-200">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-gray-300">
+                <div class="p-4">
+                    <div class="text-3xl text-brand-gold mb-3"><i class="fa-solid fa-compass-drafting"></i></div>
+                    <h3 class="font-serif text-lg font-bold">Medición a Domicilio</h3>
+                    <p class="text-sm text-gray-500 mt-2">Vamos a tu casa para asegurar el calce perfecto.</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-3xl text-brand-gold mb-3"><i class="fa-solid fa-scissors"></i></div>
+                    <h3 class="font-serif text-lg font-bold">Confección Propia</h3>
+                    <p class="text-sm text-gray-500 mt-2">Taller especializado con terminaciones de lujo.</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-3xl text-brand-gold mb-3"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h3 class="font-serif text-lg font-bold">Envíos e Instalación</h3>
+                    <p class="text-sm text-gray-500 mt-2">Servicio completo llave en mano en toda la costa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Grid -->
+    <section id="colecciones" class="py-20 texture-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-brand-gold uppercase tracking-widest text-xs font-bold">Catálogo Destacado</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mt-2">Inspiración Textil</h2>
+                <div class="w-24 h-1 bg-brand-gold mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Item 1 -->
+                <div class="group cursor-pointer">
+                    <div class="img-hover-zoom relative h-80 overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1528459199957-0ffdb535c95f?q=80&w=1000&auto=format&fit=crop" alt="Cortinas de Lino" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-80 group-hover:opacity-100 transition duration-300"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <p class="text-xs uppercase tracking-wider mb-1 text-brand-gold">Tendencia</p>
+                            <h3 class="font-serif text-2xl">Linos y Gasas</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="group cursor-pointer">
+                    <div class="img-hover-zoom relative h-80 overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1505693416388-b0346efee749?q=80&w=1000&auto=format&fit=crop" alt="Terciopelos" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-80 group-hover:opacity-100 transition duration-300"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <p class="text-xs uppercase tracking-wider mb-1 text-brand-gold">Sofisticación</p>
+                            <h3 class="font-serif text-2xl">Terciopelos</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="group cursor-pointer">
+                    <div class="img-hover-zoom relative h-80 overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1000&auto=format&fit=crop" alt="Sistemas Roller" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-80 group-hover:opacity-100 transition duration-300"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <p class="text-xs uppercase tracking-wider mb-1 text-brand-gold">Funcionalidad</p>
+                            <h3 class="font-serif text-2xl">Sistemas Roller</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="group cursor-pointer lg:col-span-2">
+                    <div class="img-hover-zoom relative h-80 overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1600&auto=format&fit=crop" alt="Tapicería" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-80 group-hover:opacity-100 transition duration-300"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <p class="text-xs uppercase tracking-wider mb-1 text-brand-gold">Renovación</p>
+                            <h3 class="font-serif text-2xl">Telas para Tapicería</h3>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Item 5 -->
+                 <div class="group cursor-pointer">
+                    <div class="img-hover-zoom relative h-80 overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1558603668-6570496b66f8?q=80&w=1000&auto=format&fit=crop" alt="Accesorios" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-80 group-hover:opacity-100 transition duration-300"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <p class="text-xs uppercase tracking-wider mb-1 text-brand-gold">Detalles</p>
+                            <h3 class="font-serif text-2xl">Rieles y Barrales</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="https://wa.me/5492231234567" class="inline-block border-b-2 border-brand-dark pb-1 text-brand-dark hover:text-brand-gold hover:border-brand-gold transition uppercase tracking-widest text-sm font-bold">
+                    Solicitar catálogo por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Calculator Section -->
+    <section id="calculadora" class="py-20 bg-brand-dark text-white relative overflow-hidden">
+        <!-- Abstract Decoration -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-gold opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                
+                <div class="lg:w-1/2">
+                    <span class="text-brand-gold uppercase tracking-widest text-xs font-bold">Herramienta Útil</span>
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold mt-2 mb-6">Calculadora de Metraje</h2>
+                    <p class="text-gray-300 mb-8 leading-relaxed">
+                        ¿No sabes cuánta tela necesitas? Utiliza nuestra herramienta exclusiva para obtener un estimado rápido antes de venir al local. Ingresa las medidas de tu ventana y nosotros te sugerimos la cantidad.
+                    </p>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-gold"></i> Cálculo rápido y sencillo.</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-gold"></i> Ideal para presupuestar por WhatsApp.</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-gold"></i> Asesoramiento profesional garantizado.</li>
+                    </ul>
+                </div>
+
+                <div class="lg:w-1/2 w-full bg-white text-brand-gray p-8 shadow-2xl rounded-sm">
+                    <form id="fabric-calc" onsubmit="calculateFabric(event)">
+                        <div class="grid grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-xs uppercase font-bold mb-2">Ancho Ventana (m)</label>
+                                <input type="number" step="0.01" id="width" class="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-brand-gold transition bg-transparent" placeholder="ej. 2.00" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase font-bold mb-2">Alto Ventana (m)</label>
+                                <input type="number" step="0.01" id="height" class="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-brand-gold transition bg-transparent" placeholder="ej. 2.40" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-xs uppercase font-bold mb-2">Tipo de Frunce</label>
+                            <select id="fullness" class="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-brand-gold bg-transparent">
+                                <option value="2">Normal (x2)</option>
+                                <option value="2.5">Tupido (x2.5)</option>
+                                <option value="3">Lujo (x3)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <label class="block text-xs uppercase font-bold mb-2">Ancho de la Tela</label>
+                            <select id="fabricWidth" class="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-brand-gold bg-transparent">
+                                <option value="1.40">1.40 metros (Estándar)</option>
+                                <option value="2.80">2.80 metros (Doble Ancho)</option>
+                                <option value="3.00">3.00 metros (Cortinero)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="w-full bg-brand-dark text-white py-4 uppercase tracking-widest text-sm font-bold hover:bg-brand-gold transition duration-300">
+                            Calcular Estimado
+                        </button>
+                    </form>
+
+                    <!-- Result Box (Hidden initially) -->
+                    <div id="result-box" class="hidden mt-6 pt-6 border-t border-gray-100 animate-pulse">
+                        <div class="text-center">
+                            <p class="text-xs uppercase text-gray-500 mb-1">Necesitas aproximadamente:</p>
+                            <h3 class="text-4xl font-serif text-brand-gold font-bold" id="result-meters">0.00 m</h3>
+                            <p class="text-xs text-gray-400 mt-2">*Este es un estimado. Consultar con nuestros expertos.</p>
+                            <a href="https://wa.me/5492231234567?text=Hola,%20hice%20el%20cálculo%20en%20la%20web%20y%20necesito%20presupuesto." target="_blank" class="mt-4 inline-block bg-green-600 text-white px-4 py-2 text-xs font-bold uppercase rounded hover:bg-green-700 transition">
+                                <i class="fa-brands fa-whatsapp"></i> Enviar resultado
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials / Social Proof -->
+    <section class="py-20 bg-brand-cream border-t border-gray-200">
+        <div class="container mx-auto px-6 text-center">
+            <i class="fa-solid fa-quote-left text-4xl text-brand-gold opacity-30 mb-6"></i>
+            <h2 class="font-serif text-2xl md:text-3xl italic text-brand-gray max-w-3xl mx-auto mb-8">
+                "Encontré la tienda por Google Maps y la experiencia fue excelente. Me asesoraron con las cortinas del living y la calidad de la tela es increíble."
+            </h2>
+            <div class="flex items-center justify-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Cliente" class="w-full h-full object-cover">
+                </div>
+                <div class="text-left">
+                    <p class="font-bold text-brand-dark text-sm">María Laura G.</p>
+                    <p class="text-xs text-brand-gold uppercase tracking-widest">Reseña de Google</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA & Location -->
+    <section id="contacto" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-brand-gold uppercase tracking-widest text-xs font-bold">Ubicación</span>
+                <h2 class="font-serif text-4xl font-bold text-brand-dark mt-2">Visítanos en Mar del Plata</h2>
+            </div>
+
+            <div class="flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+                <!-- Map / Image -->
+                <div class="md:w-1/2 h-80 md:h-auto bg-gray-200 relative">
+                     <!-- En producción, reemplaza el src con el embed real de tu ubicación en Google Maps -->
+                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50326.60277322998!2d-57.59600989397669!3d-38.01736731998394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9584d94d19d34209%3A0xdd9670804bfed126!2sMar%20del%20Plata%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1709123456789!5m2!1ses!2sar" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="grayscale hover:grayscale-0 transition duration-500"></iframe>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="md:w-1/2 p-12 bg-brand-dark text-white flex flex-col justify-center">
+                    <h3 class="font-serif text-3xl mb-6">Información de Contacto</h3>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-brand-gold/10 rounded-full text-brand-gold">
+                                <i class="fa-solid fa-location-dot text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm uppercase tracking-wide mb-1">Dirección</p>
+                                <p class="text-gray-300">Av. Juan B. Justo 1234<br>Mar del Plata, Argentina</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-brand-gold/10 rounded-full text-brand-gold">
+                                <i class="fa-brands fa-whatsapp text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm uppercase tracking-wide mb-1">WhatsApp & Ventas</p>
+                                <p class="text-gray-300">+54 9 223 123-4567</p>
+                                <p class="text-xs text-gray-500 mt-1">Respuesta inmediata</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-brand-gold/10 rounded-full text-brand-gold">
+                                <i class="fa-regular fa-envelope text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm uppercase tracking-wide mb-1">Correo Electrónico</p>
+                                <p class="text-gray-300">
+                                    <a href="mailto:ventas@telasyalgomas.com" class="hover:text-brand-gold transition">ventas@telasyalgomas.com</a>
+                                </p>
+                                <p class="text-xs text-gray-500 mt-1">Respondemos dentro de 24 horas</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-brand-gold/10 rounded-full text-brand-gold">
+                                <i class="fa-regular fa-clock text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm uppercase tracking-wide mb-1">Horarios de Atención</p>
+                                <p class="text-gray-300">Lunes a Viernes: 9:00 - 20:00</p>
+                                <p class="text-gray-300">Sábados: 9:00 - 13:00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <a href="https://wa.me/5492231234567" target="_blank" class="block w-full text-center bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-sm transition uppercase tracking-widest text-sm font-bold shadow-lg">
+                            <i class="fa-brands fa-whatsapp text-lg mr-2"></i> Hablar con un vendedor
+                        </a>
+                        <a href="mailto:ventas@telasyalgomas.com?subject=Consulta%20desde%20la%20web&body=Hola,%20quiero%20hacer%20una%20consulta%20sobre%20telas/cortinas.%20Mis%20datos%20son:%20" class="mt-4 block w-full text-center bg-brand-gold hover:bg-white text-brand-dark px-8 py-4 rounded-sm transition uppercase tracking-widest text-sm font-bold shadow-lg">
+                            <i class="fa-regular fa-envelope text-lg mr-2"></i> Enviar consulta por correo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <a href="#" class="text-2xl font-serif font-bold tracking-wide flex items-center justify-center md:justify-start gap-2">
+                    <i class="fa-solid fa-layer-group text-brand-gold"></i> Telas y Algo Más
+                </a>
+                <p class="text-xs text-gray-500 mt-2 uppercase tracking-widest">Excelencia en Decoración • Mar del Plata</p>
+            </div>
+            
+            <div class="flex space-x-6">
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-instagram text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-facebook-f text-xl"></i></a>
+                <!-- Link directo a Google Maps si tuvieras el link de la ficha -->
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-google text-xl"></i></a>
+            </div>
+            
+            <div class="text-xs text-gray-600">
+                &copy; 2024 Telas y Algo Más.
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/5492231234567" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 hover:scale-110 transition duration-300 z-50 animate-bounce">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- Logic Script -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Change Navbar on Scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+
+        // Fabric Calculator Logic
+        function calculateFabric(e) {
+            e.preventDefault();
+            
+            // Get inputs
+            const width = parseFloat(document.getElementById('width').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const fullness = parseFloat(document.getElementById('fullness').value);
+            const fabricWidth = parseFloat(document.getElementById('fabricWidth').value);
+            
+            let totalMeters = 0;
+
+            // Basic Logic (Simplified for Demo)
+            // 1. Calculate how many widths (paños) are needed based on window width * fullness
+            const totalWidthNeeded = width * fullness;
+            
+            let numberOfCuts = Math.ceil(totalWidthNeeded / fabricWidth);
+            
+            // If fabric is wider than the needed width (e.g. using 3m fabric for a 2m window railroading), 
+            // calculation changes, but for standard vertical cuts:
+            
+            // Height + Hem allowance (0.40m approx)
+            const cutLength = height + 0.40;
+            
+            // If fabric is "Cortinero" (usually railroaded/apaisado), the meters needed is just width * fullness (if height fits)
+            if (fabricWidth >= 2.80 && height <= (fabricWidth - 0.20)) {
+               // Assuming we use the fabric width as the drop
+               totalMeters = totalWidthNeeded;
+            } else {
+               // Standard vertical panels calculation
+               totalMeters = numberOfCuts * cutLength;
+            }
+
+            // Display Result
+            const resultBox = document.getElementById('result-box');
+            const resultText = document.getElementById('result-meters');
+            
+            resultBox.classList.remove('hidden');
+            resultText.innerText = totalMeters.toFixed(2) + " m";
+            
+            // Scroll to result for better UX on mobile
+            resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
